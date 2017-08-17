@@ -1,5 +1,6 @@
 import tkinter as tk
 okno = tk.Tk()
+import math
 
 #################
 
@@ -44,7 +45,7 @@ gumbminus.grid(row = 4, column = 3)
 gumbkrat = tk.Button(okno, text = "x")
 gumbkrat.grid(row = 3, column = 3)
 
-gumbdeljeno = tk.Button(okno, text = "+")
+gumbdeljeno = tk.Button(okno, text = "/")
 gumbdeljeno.grid(row = 2, column = 3)
 
 gumboklepajl = tk.Button(okno, text = "(")
@@ -52,9 +53,23 @@ gumboklepajl.grid(row = 5, column = 1)
 
 gumboklepajd = tk.Button(okno, text = ")")
 gumboklepajd.grid(row = 5, column = 2)
-                         
-                         
 
+gumbjeenako = tk.Button(okno, text = "=")
+gumbjeenako.grid(row = 6, column = 3)
+
+gumbpika = tk. Button(okno, text = ".")
+gumbpika.grid(row = 6, column = 0)
+
+gumbc = tk.Button(okno, text = "C")
+gumbc.grid(row = 6, column = 1)
+
+gumbac = tk.Button(okno, text = "AC")
+gumbac.grid(row = 6, column = 2)
+                         
+ #VNOSNO POLJE
+
+vhod = tk.Entry(okno)
+vhod.grid(row = 0, columnspan = 4)
 
 
 
