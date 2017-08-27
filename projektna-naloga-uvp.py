@@ -3,7 +3,8 @@ okno = Tk()
 okno.title("Kalkulator")   #naslov okna
 
 #========================================================================
-
+#NAREDI:
+# - gumb clear, kvadratni koren, potenca DA BO GUMB DELAL (FUNKCIJA)
 #========================================================================
 #VSE FUNKCIJE
 
@@ -16,7 +17,21 @@ def gumbClearAll():     #izbriše vse
     global operacija
     operacija = ""
     text_input.set("")
-
+def koliko(niz, datoteka):
+    imena = niz.split(',')
+    brez_ponovitev = []
+    for ime in imena:
+        if ime not in brez_ponovitev:
+            brez_ponovitev.append(ime)
+    with open(datoteka, 'w') as f:
+        for ime in brez_ponovitev:
+            print(ime, imena.count(ime), file=f)
+def gumbClear():  #FUNKCIJA NE DELA, BO TREBA POPRAVIT
+    #izbriše zadnji element
+    global operacija
+    operacija = ""
+    text_input.get()[:-1]
+    
 def gumbEnako():
     global operacija
     sumup = str(eval(operacija))
@@ -65,6 +80,7 @@ gumb8.grid(row = 2, column = 1)
 gumb9 = Button(okno, text = "9", command = lambda: gumbKlik(9))
 gumb9.grid(row = 2, column = 2)
 
+
 gumbplus = Button(okno, text = "+", command = lambda: gumbKlik("+"))
 gumbplus.grid(row = 5, column = 3)
 
@@ -73,7 +89,6 @@ gumbminus.grid(row = 4, column = 3)
 
 gumbkrat = Button(okno, text = "x", command = lambda: gumbKlik("*"))
 gumbkrat.grid(row = 3, column = 3)
-
 
 gumbdeljeno = Button(okno, text = "/", command = lambda: gumbKlik("/"))
 gumbdeljeno.grid(row = 2, column = 3)
@@ -90,11 +105,17 @@ gumbjeenako.grid(row = 6, column = 3)
 gumbpika = Button(okno, text = ".", command = lambda: gumbKlik("."))
 gumbpika.grid(row = 6, column = 0)
 
-gumbc = Button(okno, text = "C")
+gumbc = Button(okno, text = "C", command = gumbClear)  #NE DELA COMMAND
 gumbc.grid(row = 6, column = 1)
 
 gumbac = Button(okno, text = "AC", command = gumbClearAll)
 gumbac.grid(row = 6, column = 2)
+
+gumbkoren = Button(okno, text = "√", command = gumbClearAll)  #NE DELA COMMAND VALDA
+gumbkoren.grid(row = 1, column = 0)
+
+gumbkvadrat = Button(okno, text = "^", command = lambda: gumbKlik("**"))  #NE DELA COMMAND
+gumbkvadrat.grid(row = 1, column = 3)
                          
 #========================================================================
 okno.mainloop()
