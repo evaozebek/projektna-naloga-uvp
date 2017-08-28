@@ -1,4 +1,5 @@
 from tkinter import *
+from math import sqrt
 okno = Tk()
 okno.title("Kalkulator")   #naslov okna
 
@@ -17,6 +18,7 @@ def gumbClearAll():     #izbriše vse
     global operacija
     operacija = ""
     text_input.set("")
+    
 def koliko(niz, datoteka):
     imena = niz.split(',')
     brez_ponovitev = []
@@ -26,22 +28,27 @@ def koliko(niz, datoteka):
     with open(datoteka, 'w') as f:
         for ime in brez_ponovitev:
             print(ime, imena.count(ime), file=f)
-def gumbClear():  #FUNKCIJA NE DELA, BO TREBA POPRAVIT
-    #izbriše zadnji element
+def gumbClear():  #izbriše zadnji element
     global operacija
     operacija = ""
-    text_input.get()[:-1]
+    text = text_input.get()[:-1]
+    text_input.set(text)        
     
 def gumbEnako():
     global operacija
     sumup = str(eval(operacija))
     text_input.set(sumup)
-    operacija = ""
+    operacija = str(sumup)  #da lahko potem se naprej rezultat uporabljas
+
+def gumbKoren():
+    global operacija
+    sumup = float(eval(operacija))
+    text_input.set(str(round(sqrt(sumup),ndigits = 5))) # z ndigits dolocis koliko mest hoces za vejico
+    operacija = str(sqrt(sumup))
 
 operacija = ""
 text_input = StringVar()              
 
-   
 #========================================================================
 #VNOSNO POLJE
 
@@ -80,7 +87,6 @@ gumb8.grid(row = 2, column = 1)
 gumb9 = Button(okno, text = "9", command = lambda: gumbKlik(9))
 gumb9.grid(row = 2, column = 2)
 
-
 gumbplus = Button(okno, text = "+", command = lambda: gumbKlik("+"))
 gumbplus.grid(row = 5, column = 3)
 
@@ -105,16 +111,16 @@ gumbjeenako.grid(row = 6, column = 3)
 gumbpika = Button(okno, text = ".", command = lambda: gumbKlik("."))
 gumbpika.grid(row = 6, column = 0)
 
-gumbc = Button(okno, text = "C", command = gumbClear)  #NE DELA COMMAND
+gumbc = Button(okno, text = "C", command = gumbClear)
 gumbc.grid(row = 6, column = 1)
 
 gumbac = Button(okno, text = "AC", command = gumbClearAll)
 gumbac.grid(row = 6, column = 2)
 
-gumbkoren = Button(okno, text = "√", command = gumbClearAll)  #NE DELA COMMAND VALDA
+gumbkoren = Button(okno, text = "√", command = gumbKoren)  
 gumbkoren.grid(row = 1, column = 0)
 
-gumbkvadrat = Button(okno, text = "^", command = lambda: gumbKlik("**"))  #NE DELA COMMAND
+gumbkvadrat = Button(okno, text = "^", command = lambda: gumbKlik("**"))
 gumbkvadrat.grid(row = 1, column = 3)
                          
 #========================================================================
