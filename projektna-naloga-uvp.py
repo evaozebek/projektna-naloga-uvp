@@ -15,37 +15,28 @@ def gumbClearAll():     #izbriše vse
     global operacija
     operacija = ""
     text_input.set("")
-    
-def koliko(niz, datoteka):
-    imena = niz.split(',')
-    brez_ponovitev = []
-    for ime in imena:
-        if ime not in brez_ponovitev:
-            brez_ponovitev.append(ime)
-    with open(datoteka, 'w') as f:
-        for ime in brez_ponovitev:
-            print(ime, imena.count(ime), file=f)
-            
+   
+           
 def gumbClear():  #izbriše zadnji element
     global operacija
-    operacija = ""
+    operacija = operacija[:-1]
     text = text_input.get()[:-1]
     text_input.set(text)        
     
 def gumbEnako():
     global operacija
-    sumup = str(eval(operacija))
+    sumup = str(eval(operacija)) #eval tisto reč ki je noter požene kot funkcijo
     text_input.set(sumup)
     operacija = str(sumup)  #da lahko rezultat uporabljamo še naprej
 
 def gumbKoren():
     global operacija
     sumup = float(eval(operacija))
-    text_input.set(str(round(sqrt(sumup),ndigits = 5))) # z ndigits določimo koliko mest želimo za vejico
+    text_input.set(str(round(sqrt(sumup), ndigits = 5))) # z ndigits določimo koliko mest želimo za vejico
     operacija = str(sqrt(sumup))
 
 operacija = ""
-text_input = StringVar()              
+text_input = StringVar()  #tkinter            
 
 #========================================================================
 #VNOSNO POLJE
